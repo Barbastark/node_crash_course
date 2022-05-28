@@ -118,7 +118,7 @@ fs.readFile("./assets/sample.txt", (err, data) => {
  * callback: 
  *  
  */
-fs.writeFile("./sample_write_text.txt", "Haha!!", () => {
+fs.writeFile("./assets/sample_write_text.txt", "Haha!!", () => {
   console.log("Haha was written to a text file haha!");
 });
 
@@ -142,8 +142,8 @@ fs.writeFile("./sample_write_text.txt", "Haha!!", () => {
  */
 
 // mkdir
-if (!fs.existsSync("./dumb_directory")) {
-  fs.mkdir("./dumb_directory", (err) => {
+if (!fs.existsSync("./assets/dumb_directory")) {
+  fs.mkdir("./assets/dumb_directory", (err) => {
     if(err) {
       console.log(err);
     }
@@ -152,8 +152,8 @@ if (!fs.existsSync("./dumb_directory")) {
 }
 
 // rmdir
-if (fs.existsSync("./dumb_directory")) {
-  fs.rmdir("./dumb_directory", (err) => {
+if (fs.existsSync("./assets/dumb_directory")) {
+  fs.rmdir("./assets/dumb_directory", (err) => {
     if(err) {
       console.log(err);
     }
@@ -218,7 +218,7 @@ readStreamEncoded.on("data", (chunk) => {
 
 /**** Write streams ****/
 
-const writeStream = fs.createWriteStream("./humungus_uploaded.txt")
+const writeStream = fs.createWriteStream("./assets/humungus_uploaded.txt")
 
 readStream.on("data", (chunk) => {
   writeStream.write(chunk);

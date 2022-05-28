@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Barbastark/node_crash_course/issues"
   },
-  "homepage": "https://github.com/Barbastark/node_crash_course#readme"
+  "homepage": "https://github.com/Barbastark/node_crash_course#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
