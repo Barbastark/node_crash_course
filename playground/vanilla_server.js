@@ -40,7 +40,31 @@
  * 400 Range - User or client errer codes
  * 
  * 500 Range - Server error codes
+ * 
  *  
+ * ***********************
+ * **** HTTP Requests ****
+ * ***********************
+ * 
+ * GET - Requests to get a resource
+ * 
+ * POST - Requests to create new data
+ * 
+ * DELETE - Requests to delete data
+ * 
+ * PUT - Requests to update data
+ * 
+ * 
+ * - Different types of requests can share the same route.
+ *   E.g. a GET and a POST request can share the route /route/shitroute
+ *   
+ * **************************
+ * **** Route Parameters ****
+ * **************************
+ * 
+ * - The variable parts of a route that may change,
+ *   e.g. localhost:3000/blogs:id (id is a route parameter)
+ * 
  */
 
 const http = require("http");
@@ -74,7 +98,8 @@ const server = http.createServer((req, res) => {
      * *******************
      * - If a resource is moved or renamed, all links created by
      *   users and other web sites to that resource will break.
-     *  */ 
+     *  
+     * */ 
 
     case "/about-me":
       res.statusCode = 301;

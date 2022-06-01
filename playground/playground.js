@@ -79,6 +79,7 @@ console.log(homeDir);
  */
 
 const fs = require("fs");
+const { resolveInclude } = require("ejs");
 
 /*******************************
  * **** The readFile method ****
@@ -232,3 +233,166 @@ readStream.on("data", (chunk) => {
 
 readStream.pipe(writeStream);
 
+
+
+/**************************************
+ * **** View Engines and Templates ****
+ * ************************************
+ * 
+ * - View engines, also called template engines, are used to 
+ *   inject dynamic content into html pages.
+ * 
+ * - EJS is a popular view engine.
+ * 
+ * - Templates are processed through the view engine on the server
+ *   before its sent to the browser.
+ * 
+ * - This process is called server side rendering. 
+ *  
+ * - Passing dynamic data into a view is accomplished by passing
+ *   an object as second argument to the render method.
+ * 
+ */
+
+/********************
+ * **** Partials ****
+ * ******************
+ * 
+ * - A partial is a part of a template that can be 
+ *   included in different views.
+ * 
+ * - Avoids repetition and keeps code dry. 
+ * 
+ * - <%- include=(relative_path_to_file)) %> 
+ * 
+ * - The minus sign is used when including partials
+ *   since it doesn't escape special characters.
+ * 
+ * - The equal sign escapes special characters which results
+ *   in a string value being outputted.
+ * 
+ */
+
+/**********************
+ * **** Middleware ****
+ * ********************
+ * 
+ * - Code that runs (on the server) between getting a 
+ *   request and sending a response.
+ * 
+ * - In express, the use() method is used to run middleware.
+ * 
+ * - The next() method tells the middleware that its finnished
+ *   and move on.
+ * 
+ * - If next method is left out, the code hangs.
+ *   
+ * **** Third Party Middleware ****
+ * 
+ * - Morgan: logger middleware
+ * 
+ * 
+ * **** Middleware Examples
+ * 
+ * - Logger middleware to log details of every request.
+ * 
+ * - Authentication check middleware for protected routs.
+ * 
+ * - Middleware to parse JSON data from requests.
+ * 
+ * - Return 404 pages.
+ * 
+ * */
+
+/*************************************************************
+ * Buckle up cause here comes some middleware in action haha!!
+ *  */ 
+
+// A pretty stupid piece of middleware
+app.use((req, res, next) => {
+  console.log("____Request Incoming____");
+  console.log("Host: ", req.hostname);
+  console.log("Path: ", req.path);
+  console.log("Method: ", req.method);
+  next();
+});
+
+// Another even more stupid piece of middleware to hammer home a point
+app.use((req, res, next) => {
+  console.log("____A Pointless Middleware____");
+  console.log("Another piece of meaningless middleware");
+  next();
+});
+
+/*******************************************
+ * ****  Allow Browser Access To Files  ****
+ * *****************************************
+ * 
+ * - In order for the browser to get access to files we have to 
+ *   specify what files should be allowed to be accessed.
+ * 
+ * - By default the server protects all of our files from being 
+ *   accessed by users in the browser.
+ * 
+ * - This can be accomplished using the static middleware that
+ *   comes with express.
+ * 
+ *  */ 
+
+// Makes files inside the public directory accessible to the browser.
+const express = require("express");
+app.use(express.static("public"));
+
+/****************************************
+ * **** Mongo DB and NoSQL Databases ****
+ * **************************************
+ * 
+ * - MongoDB is a NoSql database
+ * 
+ * - Stands for not only sql
+ * 
+ * **********************
+ * **** NoSQL vs SQL ****
+ * **********************
+ * 
+ * ------------------------------
+ * SQL       |      NoSQL
+ * ------------------------------
+ * Tables           Collections
+ * Rows             Documents
+ * Columns          ?
+ * ------------------------------
+ * 
+ * *****************
+ * **** MongoDB ****
+ * *****************
+ * 
+ * Collections: Stores a particular type of data, e.g. users or customers.
+ * 
+ * Documents: A collections store documents. Each document in a collection
+ *            has a unique, auto-generated _id. 
+ *   
+ * ******************
+ * **** Mongoose ****
+ * ******************
+ * 
+ * - Mongoose is an ODM library
+ * 
+ * - ODM: Object Document Mapping
+ * 
+ * - Provides a simplified way to connect to and communicate with the database.
+ * 
+ * - This is accompliched by allowing us to create simple data models which have
+ *   database query methods to create, read, update and delete db documents.
+ * 
+ * **************************
+ * **** Schemas & Models ****
+ * **************************
+ * 
+ * - Schemas defines the structure of a type of data / document stored in 
+ *   a database collection.   
+ * 
+ * - Models allow us to communicate with database collections.
+ * 
+ * 
+ */
